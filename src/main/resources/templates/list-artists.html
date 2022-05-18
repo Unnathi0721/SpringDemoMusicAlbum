@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thymeleaf Demo</title>
+
+    <!-- reference CSS file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <link rel="stylesheet"
+          th:href="@{/css/demo.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<!--<p th:text="'Time on the server is ' + ${theDate}" class="funny" />-->
+
+<div class="jumbotron" style="background-image:url('/images/MusicBAck.jpeg');">
+    <div class="container">
+        <h1>Artist List</h1>
+        <!--    <h3>Employee Directory</h3>-->
+        <hr>
+
+        <div>
+            User: <span sec:authentication="name"></span>
+            <br>
+            Role(s): <span sec:authentication="principal.authorities"></span>
+            <br><br>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+
+    <form th:action="@{/artist/search}" class="form-inline">
+        <a th:href="@{/artist/showFormForAdd}"
+           class="btn btn-primary btn-sm mr-5 mb-3">
+            Add Artist
+        </a>
+
+        <input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="artistName" placeholder="Search by name" />
+
+        <button class="btn btn-success mb-3" type="submit">Search</button>
+        <a th:href="@{/album/list}"
+           class="btn btn-primary btn-sm mr-5 mb-3" style="margin:0px 40px;">
+            Album List
+        </a>
+    </form>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>SNo.</th>
+            <th>Artist</th>
+            <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE', 'ROLE_ADMIN')">
+                <th>Action</th>
+            </div>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempArtist : ${artists}">
+
+            <td th:text="${tempArtist.id}" />
+            <td th:text="${tempArtist.artist}" />
+            <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE', 'ROLE_ADMIN')">
+
+                <td>
+                    <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE', 'ROLE_ADMIN')" style="display:inline;">
+
+                        <!-- Add "update" button/link -->
+                        <a th:href="@{/artist/showFormForUpdate(artistId=${tempArtist.id})}"
+                           class="btn btn-info btn-sm">
+                            Update
+                        </a>
+
+                    </div>
+                    <sec:authorize access="hasRole('ADMIN')">
+
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" style="display:inline;">
+                        |
+                        <!-- Add "delete" button/link -->
+                        <a th:href="@{/artist/delete(artistId=${tempArtist.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="if (!(confirm('Are you sure you want to delete this artist?'))) return false">
+                            Delete
+                        </a>
+
+                    </div>
+                        </sec:authorize>
+                    |
+                    <div sec:authorize="hasAnyRole('ROLE_EMPLOYEE', 'ROLE_ADMIN')" style="display:inline;">
+
+                        <!-- Add "update" button/link -->
+<!--                        <form th:action="@{/album/showFormForAdd}" class="form-inline" th:object="${tempArtist}" method="POST">-->
+<!--                            <button class="btn btn-info btn-sm" type="submit">Add Album</button>-->
+<!--&lt;!&ndash;                            <input type="hidden" th:field="*{tempArtist}"/>&ndash;&gt;-->
+<!--                            <input type="hidden" th:field="*{id}" />-->
+<!--                            <input type="hidden" th:field="*{artist}" />-->
+<!--                        </form>-->
+                        <a th:href="@{/album/showFormForAdd(artistId=${tempArtist.id})}"
+                           class="btn btn-info btn-sm">
+                            Add Album
+                        </a>
+
+
+                    </div>
+                </td>
+
+            </div>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Add a logout button -->
+    <form action="#" th:action="@{/logout}"
+          method="POST">
+
+        <input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+        <a th:href="@{/}" style="margin:0px 25px;">
+            Back To Home Page &raquo;
+        </a>
+    </form>
+
+</div>
+</body>
+
+</html>
