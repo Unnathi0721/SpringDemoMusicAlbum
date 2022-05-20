@@ -19,6 +19,8 @@
 		<sonar.organization>unnathi0721</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,8 +80,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>spring-releases</id>-->
+<!--			<url>https://repo.spring.io/libs-release</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
+<!--	<pluginRepositories>-->
+<!--		<pluginRepository>-->
+<!--			<id>spring-releases</id>-->
+<!--			<url>https://repo.spring.io/libs-release</url>-->
+<!--		</pluginRepository>-->
+<!--	</pluginRepositories>-->
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

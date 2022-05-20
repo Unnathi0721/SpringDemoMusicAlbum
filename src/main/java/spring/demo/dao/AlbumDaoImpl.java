@@ -48,7 +48,7 @@ public class AlbumDaoImpl implements AlbumDao{
         Session currentSession = sessionFactory.openSession();
         Album theAlbum;
         try {
-            currentSession = sessionFactory.openSession();
+            //currentSession = sessionFactory.openSession();
             theAlbum = currentSession.get(Album.class, id);
         } finally {
             if (currentSession!=null) currentSession.close();
