@@ -46,8 +46,15 @@ public class AlbumDaoImpl implements AlbumDao{
     @Transactional
     public Album getAlbum(int id) {
         Session currentSession = sessionFactory.openSession();
+        Album theAlbum;
+        try {
+            currentSession = sessionFactory.openSession();
+            theAlbum = currentSession.get(Album.class, id);
+        } finally {
+            if (currentSession!=null) currentSession.close();
+        }
 
-        Album theAlbum = currentSession.get(Album.class, id);
+//        Album theAlbum = currentSession.get(Album.class, id);
 
         return theAlbum;
 
@@ -66,10 +73,14 @@ public class AlbumDaoImpl implements AlbumDao{
     @Transactional
     public List<Album> findAll() {
         Session currentSession = sessionFactory.openSession();
-        Query<Album> theQuery =
-                currentSession.createQuery("from Album", Album.class);
-        System.out.println("-->"+theQuery.getResultList());
-        List<Album> albums = theQuery.getResultList();
+        List<Album> albums;
+        try {
+            Query<Album> theQuery =
+                    currentSession.createQuery("from Album", Album.class);
+            albums = theQuery.getResultList();
+        }finally{
+            if (currentSession!=null) currentSession.close();
+        }
         return albums;
     }
 

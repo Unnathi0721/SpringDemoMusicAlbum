@@ -57,7 +57,12 @@
         </a>
     </form>
 
+   <div class="search" style="margin:5px;">
 
+       <div th:if="${searchWord != null}" style="font-size:120%;font-color:#A9A9A9;">
+           Search results for word : <span type="text" th:text="*{searchWord}" />
+       </div>
+   </div>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>

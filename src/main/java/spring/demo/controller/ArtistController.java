@@ -80,6 +80,7 @@ public class ArtistController {
                          Model theModel) {
         List<Artist> theArtists = artistService.searchBy(theName);
         theModel.addAttribute("artists", theArtists);
+        theModel.addAttribute("searchWord", theName);
         return "list-artists";
 
     }

@@ -43,6 +43,10 @@ public class AlbumController {
 //        if(result.hasErrors()){
 //            return "errors/showFormForAdd";
 //        }
+        if(artistService.getArtist(id)==null){
+            theModel.addAttribute("artistId",id);
+            return "undefined";
+        }
         Album theAlbum = new Album();
         //theAlbum.setArtist(artist);
         //System.out.println(artist.getArtist());
@@ -67,6 +71,10 @@ public class AlbumController {
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("albumId") int theId,
                                     Model theModel) {
+        if(albumService.getAlbum(theId)==null){
+            theModel.addAttribute("artistId",theId);
+            return "undefined";
+        }
         Album theAlbum = albumService.getAlbum(theId);
         theModel.addAttribute("album", theAlbum);
 
@@ -136,6 +144,7 @@ public class AlbumController {
                          Model theModel) {
         List<Album> theAlbums = albumService.searchBy(theName);
         theModel.addAttribute("albums", theAlbums);
+        theModel.addAttribute("searchWord", theName);
         return "list-albums";
 
     }

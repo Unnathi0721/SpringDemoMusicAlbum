@@ -44,8 +44,12 @@ public class ArtistDaoImpl implements ArtistDao{
     @Override
     public Artist getArtist(int id) {
         Session currentSession = sessionFactory.openSession();
-
-        Artist theArtist = currentSession.get(Artist.class, id);
+        Artist theArtist;
+        try {
+            theArtist = currentSession.get(Artist.class, id);
+        }finally{
+            if (currentSession!=null) currentSession.close();
+        }
 
         return theArtist;
     }
@@ -64,10 +68,15 @@ public class ArtistDaoImpl implements ArtistDao{
     @Override
     public List<Artist> findAll() {
         Session currentSession = sessionFactory.openSession();
-        Query<Artist> theQuery =
-                currentSession.createQuery("from Artist", Artist.class);
-        System.out.println("-->"+theQuery.getResultList());
-        List<Artist> artists = theQuery.getResultList();
+        List<Artist> artists;
+        try {
+            Query<Artist> theQuery =
+                    currentSession.createQuery("from Artist", Artist.class);
+            artists = theQuery.getResultList();
+        }finally{
+            if (currentSession!=null) currentSession.close();
+        }
+
         return artists;
     }
 
