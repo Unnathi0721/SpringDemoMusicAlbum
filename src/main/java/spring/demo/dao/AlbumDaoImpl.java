@@ -22,17 +22,13 @@ public class AlbumDaoImpl implements AlbumDao{
     @Override
    @Transactional
     public void addAlbum(Album album) {
-//      Session currentSession = sessionFactory.openSession();
         Session currentSession = entityManager.unwrap(Session.class);
-        System.out.println(album.toString());
-        //Artist theArtist=new Artist();
         currentSession.saveOrUpdate(album);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-//        Session currentSession = sessionFactory.openSession();
         Session currentSession = entityManager.unwrap(Session.class);
         Query theQuery =
                 currentSession.createQuery("delete from Album where id=:AlbumId");
@@ -48,13 +44,10 @@ public class AlbumDaoImpl implements AlbumDao{
         Session currentSession = sessionFactory.openSession();
         Album theAlbum;
         try {
-            //currentSession = sessionFactory.openSession();
             theAlbum = currentSession.get(Album.class, id);
         } finally {
             if (currentSession!=null) currentSession.close();
         }
-
-//        Album theAlbum = currentSession.get(Album.class, id);
 
         return theAlbum;
 
@@ -98,12 +91,6 @@ public class AlbumDaoImpl implements AlbumDao{
             query.list();
             results = query.getResultList();
             System.out.println(results);
-//            Query<Album> theQuery =
-//                    currentSession.createQuery("from Album where title=:AlbumName", Album.class);
-//            theQuery.setParameter("AlbumName", theName);
-////            theQuery.executeUpdate();
-//            theQuery.list();
-//            results = theQuery.getResultList();
         }
         else {
             results = findAll();

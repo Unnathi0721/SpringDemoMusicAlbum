@@ -23,10 +23,12 @@
 			**/spring/demo/entity/Role.java,
 			**/spring/demo/user/**,
 			**/spring/demo/validation/**,
-			**/spring/demo/dao/roleDao.java,
-			**/spring/demo/dao/roleDaoImpl.java,
-			**/spring/demo/dao/userDao.java,
-			**/spring/demo/dao/userDaoImpl.java
+			**/spring/demo/service/userService.java,
+			**/spring/demo/service/userServiceImpl.java
+<!--			**/spring/demo/dao/roleDao.java,-->
+<!--			**/spring/demo/dao/roleDaoImpl.java,-->
+<!--			**/spring/demo/dao/userDao.java,-->
+<!--			**/spring/demo/dao/userDaoImpl.java-->
 		</sonar.coverage.exclusions>
 	</properties>
 
