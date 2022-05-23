@@ -19,9 +19,14 @@
 		<sonar.organization>unnathi0721</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.exclusions>
-			**/spring/demo/aop/**
-			**/spring/demo/entity/**
-			**/spring/demo/user/**
+			**/spring/demo/aop/**,
+			**/spring/demo/entity/Role.java,
+			**/spring/demo/user/**,
+			**/spring/demo/validation/**,
+			**/spring/demo/dao/roleDao.java,
+			**/spring/demo/dao/roleDaoImpl.java,
+			**/spring/demo/dao/userDao.java,
+			**/spring/demo/dao/userDaoImpl.java
 		</sonar.coverage.exclusions>
 	</properties>
 
