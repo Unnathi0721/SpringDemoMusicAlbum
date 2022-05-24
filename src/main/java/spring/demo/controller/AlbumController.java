@@ -12,15 +12,18 @@ import spring.demo.service.ArtistService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/album")
 public class AlbumController {
+    private Logger myLogger = Logger.getLogger(getClass().getName());
     private AlbumService albumService;
     @Autowired
     private ArtistService artistService;
-    public AlbumController(AlbumService theAlbumService) {
+    public AlbumController(AlbumService theAlbumService,ArtistService theArtistService) {
         albumService = theAlbumService;
+        artistService = theArtistService;
     }
 
     // add mapping for "/list"
@@ -89,20 +92,19 @@ public class AlbumController {
             theModel.addAttribute("artistId",theId);
             return "UpdateAlbumError-form";
         }
-        System.out.println("theAlbum.getId()");
-        System.out.println(theAlbum);
+        myLogger.info("theAlbum.getId()");
+        //myLogger.info(theAlbum);
         theAlbum.setArtist(artistService.getArtist(theId));
         albumService.addAlbum(theAlbum);
         return "redirect:/album/list";
     }
     @PostMapping("/add")
     public String addAlbum(@Valid @ModelAttribute("album") Album album, BindingResult result,@RequestParam("artistId") int theId, Model theModel) {//@ModelAttribute("album") Album theAlbum,
-        System.out.println("theAlbum.getId()");
+
         if(result.hasErrors()){
             theModel.addAttribute("artistId",theId);
            return "AlbumAddError-form";
         }
-        System.out.println(album);
         album.setArtist(artistService.getArtist(theId));
         albumService.addAlbum(album);
         return "redirect:/album/list";

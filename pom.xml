@@ -23,8 +23,16 @@
 			**/spring/demo/entity/Role.java,
 			**/spring/demo/user/**,
 			**/spring/demo/validation/**,
-			**/spring/demo/service/userService.java,
-			**/spring/demo/service/userServiceImpl.java
+			**/spring/demo/dao/**,
+			**/spring/demo/DemoApplication.java,
+			**/spring/demo/config/CustomAuthenticationSuccessHandler.java,
+<!--			**/spring/demo/dao/RoleDao.java,-->
+<!--			**/spring/demo/dao/UserDao.java,-->
+<!--			**/spring/demo/dao/RoleDaoImpl.java,-->
+<!--			**/spring/demo/dao/UserDaoImpl.java,-->
+			**/spring/demo/entity/User.java
+<!--			**/spring/demo/service/userService.java,-->
+<!--			**/spring/demo/service/userServiceImpl.java-->
 <!--			**/spring/demo/dao/roleDao.java,-->
 <!--			**/spring/demo/dao/roleDaoImpl.java,-->
 <!--			**/spring/demo/dao/userDao.java,-->

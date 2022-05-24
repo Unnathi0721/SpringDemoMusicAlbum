@@ -40,9 +40,10 @@ public class Album {
 
     }
 
-    public Album(String title, String language, Artist artist) {
+    public Album(String title, String language, int stock,Artist artist) {
         this.title = title;
         this.language = language;
+        this.stock=stock;
         this.artist = artist;
     }
 //    @Autowired

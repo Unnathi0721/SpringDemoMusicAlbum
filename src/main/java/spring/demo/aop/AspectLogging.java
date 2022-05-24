@@ -5,17 +5,20 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Aspect
 @Component
 public class AspectLogging {
+    private Logger myLogger = Logger.getLogger(getClass().getName());
     @Before(value="execution(* spring.demo.controller.*.saveArtist(..))")
     public void logBefore(JoinPoint joinPoint) {
         Object[] args=joinPoint.getArgs();
         for (Object arg: args) {
-            System.out.println("Arg: " + arg.toString());
+            myLogger.info("Arg: " + arg.toString());
         }
-        System.out.println("logBefore() is running!");
-        System.out.println("hijacked : " + joinPoint.getSignature().getName());
-        System.out.println("******");
+        myLogger.info("logBefore() is running!");
+        myLogger.info("hijacked : " + joinPoint.getSignature().getName());
+        myLogger.info("******");
     }
 }

@@ -26,7 +26,9 @@ public class RegistrationController {
 
     @Autowired
     private UserService userService;
-
+    public RegistrationController(UserService userService){
+        this.userService=userService;
+    }
     private Logger logger = Logger.getLogger(getClass().getName());
 
     @InitBinder

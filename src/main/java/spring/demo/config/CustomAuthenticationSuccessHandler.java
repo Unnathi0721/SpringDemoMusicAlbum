@@ -1,6 +1,7 @@
 package spring.demo.config;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,16 +21,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Autowired
     private UserService userService;
-
+    private Logger myLogger = Logger.getLogger(getClass().getName());
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
 
-        System.out.println("\n\nIn customAuthenticationSuccessHandler\n\n");
+        myLogger.info("\n\nIn customAuthenticationSuccessHandler\n\n");
 
         String userName = authentication.getName();
 
-        System.out.println("userName=" + userName);
+        myLogger.info("userName=" + userName);
 
         User theUser = userService.findByUserName(userName);
 

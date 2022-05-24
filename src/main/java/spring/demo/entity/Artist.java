@@ -61,16 +61,16 @@ public class Artist {
         return albums;
     }
 
-    public void add(Album temp) {
-
-        if (albums == null) {
-            albums = new ArrayList<>();
-        }
-
-        albums.add(temp);
-
-        temp.setArtist(this);
-    }
+//    public void add(Album temp) {
+//
+//        if (albums == null) {
+//            albums = new ArrayList<>();
+//        }
+//
+//        albums.add(temp);
+//
+//        temp.setArtist(this);
+//    }
 
     @Override
     public String toString() {

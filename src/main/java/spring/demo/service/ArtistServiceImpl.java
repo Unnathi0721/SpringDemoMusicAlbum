@@ -11,6 +11,9 @@ import java.util.List;
 public class ArtistServiceImpl implements ArtistService{
     @Autowired
     private ArtistDao artistDao;
+//    public ArtistServiceImpl(ArtistDao artistDao){
+//        this.artistDao=artistDao;
+//    }
     @Override
     public void addArtist(Artist artist) {
         artistDao.addArtist(artist);
@@ -26,10 +29,10 @@ public class ArtistServiceImpl implements ArtistService{
         return artistDao.getArtist(id);
     }
 
-    @Override
-    public List<Album> getAlbums(int id) {
-        return artistDao.getAlbums(id);
-    }
+//    @Override
+//    public List<Album> getAlbums(int id) {
+//        return artistDao.getAlbums(id);
+//    }
 
     @Override
     public List<Artist> findAll() {
