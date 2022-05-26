@@ -19,24 +19,11 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // add a reference to our security data source
-//    @Autowired
-//    @Qualifier("securityDataSource")
-//    private DataSource securityDataSource;
     @Autowired
     private UserService userService;
 
     @Autowired
    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        // use jdbc authentication ... oh yeah!!!
-//      auth.jdbcAuthentication().dataSource(securityDataSource);
-//       // auth.authenticationProvider(authenticationProvider()).dataSource(securityDataSource);
-//        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-//
-//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -46,11 +33,11 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/employees/showForm*").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/employees/save*").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/employees/delete").hasRole("ADMIN")
-                .antMatchers("/employees/**").hasRole("EMPLOYEE")
-                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/album/showForm*").hasAnyRole("EMPLOYEE", "ADMIN")
+                .antMatchers("/album/save*").hasAnyRole("EMPLOYEE", "ADMIN")
+                .antMatchers("/album/delete").hasRole("ADMIN")
+                .antMatchers("/album/**").hasRole("EMPLOYEE")
+                .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/showMyLoginPage")
@@ -61,7 +48,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
-        //.defaultSuccessUrl("/home",true)
+
 
     }
     @Bean

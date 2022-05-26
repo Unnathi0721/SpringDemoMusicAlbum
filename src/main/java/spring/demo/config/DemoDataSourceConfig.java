@@ -13,7 +13,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
 @EnableJpaRepositories(basePackages={"${spring.data.jpa.repository.packages}"})
-//@EnableJpaRepositories(basePackages="spring.data.jpa.repository.packages")
 public class DemoDataSourceConfig {
 
     @Primary

@@ -19,9 +19,6 @@ public class AlbumDaoImpl implements AlbumDao{
     private SessionFactory sessionFactory;
     @Autowired
     private EntityManager entityManager;
-//    public AlbumDaoImpl(SessionFactory sessionFactory){
-//        this.sessionFactory=sessionFactory;
-//    }
     @Override
    @Transactional
     public void addAlbum(Album album) {
@@ -88,17 +85,14 @@ public class AlbumDaoImpl implements AlbumDao{
         if (theName != null && (theName.trim().length() > 0)) {
             Session currentSession = entityManager.unwrap(Session.class);
             theName=theName.stripTrailing();
-           //System.out.println(theName);
             Query<Album> query =currentSession.createQuery("from Album where UPPER(title) LIKE UPPER(:AlbumName)", Album.class);
             query.setParameter("AlbumName", "%" + theName + "%");
             query.list();
             results = query.getResultList();
-            //System.out.println(results);
         }
         else {
             results = findAll();
         }
-        //System.out.println(results);
         return results;
     }
 }

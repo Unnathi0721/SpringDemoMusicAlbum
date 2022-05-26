@@ -25,8 +25,6 @@ public class Artist {
     public Artist(String artist){
         this.artist=artist;
     }
-//    @OneToMany(mappedBy="artist",
-//            cascade= CascadeType.ALL)
     @OneToMany(mappedBy="artist",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
@@ -60,17 +58,6 @@ public class Artist {
     public List<Album> getAlbums() {
         return albums;
     }
-
-//    public void add(Album temp) {
-//
-//        if (albums == null) {
-//            albums = new ArrayList<>();
-//        }
-//
-//        albums.add(temp);
-//
-//        temp.setArtist(this);
-//    }
 
     @Override
     public String toString() {

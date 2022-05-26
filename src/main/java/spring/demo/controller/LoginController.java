@@ -14,24 +14,15 @@ public class LoginController {
 
     }
 
-    // add request mapping for /access-denied
-
     @GetMapping("/access-denied")
     public String showAccessDenied() {
 
         return "access-denied";
 
     }
-//    @GetMapping("/home")
-//    public String showHome() {
-//
-//        return "home";
-//        //return "redirect:/showMyLoginPage";
-//    }
     @GetMapping("/")
     public String showLogin() {
 
         return "home";
-        //return "redirect:/showMyLoginPage";
     }
 }

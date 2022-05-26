@@ -18,8 +18,6 @@ public class User implements Serializable {
 
     @Column(name = "password")
     private String password;
-//    @Column(name="enabled")
-//    private int enabled;
 
     @Column(name = "first_name")
     private String firstName;
@@ -38,7 +36,6 @@ public class User implements Serializable {
 
     public User() {
     }
-    //String firstName, String lastName, String email) {
 
     public User(String userName, String password,String firstName, String lastName, String email){
         this.userName = userName;
@@ -123,7 +120,5 @@ public class User implements Serializable {
         return "User{" + "id=" + id + ", userName='" + userName + '\'' + ", password='" + "*********" + '\''
                 + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\''
                 + ", roles=" + roles + '}';
-//        return "User{" + "id=" + id + ", userName='" + userName + '\'' + ", password='" + "*********" + '\''
-//                +  ", roles=" + roles + '}';
     }
 }

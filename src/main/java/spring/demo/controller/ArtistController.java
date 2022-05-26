@@ -21,23 +21,16 @@ public class ArtistController {
         artistService = theArtistService;
     }
 
-    // add mapping for "/list"
 
     @GetMapping(value="/list")
     public String listArtists(Model theModel) {
-
-        // get employees from db
         List<Artist> theArtists = artistService.findAll();
-
-        // add to the spring model
         theModel.addAttribute("artists", theArtists);
 
         return "list-artists";
     }
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
-
-        // create model attribute to bind form data
         Artist theArtist=new Artist();
 
         theModel.addAttribute("artist", theArtist);
@@ -50,8 +43,6 @@ public class ArtistController {
                                     Model theModel) {
         Artist theArtist= artistService.getArtist(theId);
         theModel.addAttribute("artist", theArtist);
-
-        // send over to our form
         return "artist-form";
     }
 

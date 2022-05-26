@@ -26,15 +26,11 @@ public class AlbumController {
         artistService = theArtistService;
     }
 
-    // add mapping for "/list"
-
     @GetMapping(value="/list")
     public String listAlbums(Model theModel) {
 
-        // get employees from db
         List<Album> theAlbums = albumService.findAll();
 
-        // add to the spring model
         theModel.addAttribute("albums", theAlbums);
 
         return "list-albums";
@@ -42,34 +38,15 @@ public class AlbumController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd( @RequestParam("artistId") int id, Model theModel) {
 
-        // create model attribute to bind form data
-//        if(result.hasErrors()){
-//            return "errors/showFormForAdd";
-//        }
         if(artistService.getArtist(id)==null){
             theModel.addAttribute("artistId",id);
             return "undefined";
         }
         Album theAlbum = new Album();
-        //theAlbum.setArtist(artist);
-        //System.out.println(artist.getArtist());
-       // System.out.println(theAlbum.getArtist());
         theModel.addAttribute("album", theAlbum);
         theModel.addAttribute("artistId",id);
         return "add-album-form";
     }
-//    @PostMapping("/showFormForAdd")
-//    public String showFormForAdd(@ModelAttribute("artist") Artist artist,Model theModel) {
-//
-//        // create model attribute to bind form data
-//        Album theAlbum = new Album();
-//        theAlbum.setArtist(artist);
-//        System.out.println(artist.getArtist());
-//        System.out.println(theAlbum.getArtist());
-//        theModel.addAttribute("album", theAlbum);
-//
-//        return "album-form";
-//    }
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("albumId") int theId,
@@ -81,11 +58,9 @@ public class AlbumController {
         Album theAlbum = albumService.getAlbum(theId);
         theModel.addAttribute("album", theAlbum);
 
-        // send over to our form
         return "album-form";
     }
 
-//changes done on 17 validation
     @PostMapping("/save")
     public String saveAlbum(@Valid @ModelAttribute("album") Album theAlbum,BindingResult result,@RequestParam("artistId") int theId, Model theModel) {
         if(result.hasErrors()){
@@ -93,7 +68,6 @@ public class AlbumController {
             return "UpdateAlbumError-form";
         }
         myLogger.info("theAlbum.getId()");
-        //myLogger.info(theAlbum);
         theAlbum.setArtist(artistService.getArtist(theId));
         albumService.addAlbum(theAlbum);
         return "redirect:/album/list";
@@ -109,34 +83,12 @@ public class AlbumController {
         albumService.addAlbum(album);
         return "redirect:/album/list";
     }
-    //Get mapping version trial
-//    @GetMapping("/add")
-//    public String addAlbumGet(@Valid Album album, BindingResult result,@RequestParam("artistId") int theId, Model theModel,@ModelAttribute("Album") Album theAlbum) {
-//        System.out.println("theAlbum.getId()");
-////        if(result.hasErrors()){
-////            return "redirect:/album/add?artistId="+theId;
-////        }
-//        //Album theAlbum = new Album();
-//        //theAlbum.setArtist(artist);
-//        //System.out.println(artist.getArtist());
-//        // System.out.println(theAlbum.getArtist());
-//        theModel.addAttribute("album", theAlbum);
-//        theModel.addAttribute("artistId",theId);
-//        return "add-album-form";
-////        System.out.println(theAlbum);
-////        theAlbum.setArtist(artistService.getArtist(theId));
-////        albumService.addAlbum(theAlbum);
-////        return "redirect:/album/list";
-//    }
 
 
     @GetMapping("/delete")
     public String delete(@RequestParam("albumId") int theId) {
 
-        // delete the employee
         albumService.delete(theId);
-
-        // redirect to /employees/list
         return "redirect:/album/list";
 
     }

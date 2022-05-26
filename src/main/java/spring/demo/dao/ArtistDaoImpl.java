@@ -17,9 +17,6 @@ public class ArtistDaoImpl implements ArtistDao{
     private SessionFactory sessionFactory;
     @Autowired
     private EntityManager entityManager;
-//    public ArtistDaoImpl(SessionFactory sessionFactory){
-//        this.sessionFactory=sessionFactory;
-//    }
     @Override
     @Transactional
     public void addArtist(Artist artist) {
@@ -32,7 +29,6 @@ public class ArtistDaoImpl implements ArtistDao{
     @Transactional
     public void delete(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-//        Session currentSession = sessionFactory.openSession();
         Query query =
                 currentSession.createQuery("delete from Album where artist_id=:artistId");
         query.setParameter("artistId", id);
@@ -58,15 +54,6 @@ public class ArtistDaoImpl implements ArtistDao{
     }
 
 
-//    @Override
-//    public List<Album> getAlbums(int id) {
-//        Session currentSession = sessionFactory.getCurrentSession();
-//
-//        Artist theArtist = currentSession.get(Artist.class, id);
-//
-//        return theArtist.getAlbums();
-//
-//    }
 
     @Override
     public List<Artist> findAll() {
@@ -90,18 +77,11 @@ public class ArtistDaoImpl implements ArtistDao{
         if (theName != null && (theName.trim().length() > 0)) {
             Session currentSession = entityManager.unwrap(Session.class);
             theName=theName.stripTrailing();
-            //System.out.println(theName);
 
             Query<Artist> query =currentSession.createQuery("from Artist where UPPER(artist) LIKE UPPER(:ArtistName)", Artist.class);
             query.setParameter("ArtistName", "%" + theName + "%");
             query.list();
             results = query.getResultList();
-            //System.out.println(results);
-//            Query<Artist> theQuery =
-//                    currentSession.createQuery("from Artist where artist=:ArtistName", Artist.class);
-//            theQuery.setParameter("ArtistName", theName);
-//            theQuery.list();
-//            results = theQuery.getResultList();
         }
         else {
             results = findAll();

@@ -54,7 +54,7 @@ public class RegistrationController {
             Model theModel) {
 
         String userName = theCrmUser.getUserName();
-        logger.info("Processing registration form for: " + userName);
+        logger.info("Processing registration form for: " );//+ userName);
 
         // form validation
         if (theBindingResult.hasErrors()){
@@ -73,8 +73,6 @@ public class RegistrationController {
 
         // create user account
         userService.save(theCrmUser);
-
-        logger.info("Successfully created user: " + userName);
 
         return "registration-confirmation";
     }

@@ -19,11 +19,7 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     @Transactional(noRollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW, rollbackFor = {Throwable.class})
     public Role findRoleByName(String theRoleName) {
-
-        // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
-
-        // now retrieve/read from database using name
         Query<Role> theQuery = currentSession.createQuery("from Role where name=:roleName", Role.class);
         theQuery.setParameter("roleName", theRoleName);
 

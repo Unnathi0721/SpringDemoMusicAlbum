@@ -12,9 +12,6 @@ import java.util.List;
 public class AlbumServiceImpl implements AlbumService{
     @Autowired
     private AlbumDao albumDao;
-//    public AlbumServiceImpl(AlbumDao albumDao){
-//        this.albumDao=albumDao;
-//    }
     @Override
     public void addAlbum(Album album) {
 

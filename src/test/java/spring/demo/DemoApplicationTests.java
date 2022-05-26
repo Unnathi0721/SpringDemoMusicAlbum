@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
 import org.junit.runner.RunWith;
 //import org.mockito.InjectMocks;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,6 +29,7 @@ import spring.demo.controller.LoginController;
 import spring.demo.controller.RegistrationController;
 import spring.demo.dao.AlbumDao;
 import spring.demo.dao.ArtistDao;
+import spring.demo.dao.UserDao;
 import spring.demo.entity.Album;
 import spring.demo.entity.Artist;
 import spring.demo.entity.User;
@@ -64,7 +67,7 @@ class DemoApplicationTests {
 	@Autowired
 	private ArtistService artistService;
 	@Autowired
-	private UserService userService;
+	private UserService userService= Mockito.mock(UserService.class);
 	@MockBean
 	private ArtistDao artistDao;
 	@Autowired
@@ -73,6 +76,8 @@ class DemoApplicationTests {
 	private Model model;
 	@Mock
 	BindingResult bResult;
+	@Mock
+	CrmUser user;
 	@Test
 	void loginPage()
 	{
@@ -433,7 +438,8 @@ class DemoApplicationTests {
 	@Test
 	void registerUser() {
 		RegistrationController registerController=new RegistrationController(userService);
-		CrmUser user=new CrmUser("Evelynn", "fun123", "fun123", "Evelinn", "watson","evari@gmail.com");
+		bResult=mock(BindingResult.class);
+		user=new CrmUser("Evelynaan", "fun123", "fun123", "Evelinn", "watson","evari@gmail.com");
 		String actual= registerController.processRegistrationForm(user,bResult,model);
 		String expected="registration-confirmation";
 		Assertions.assertEquals(expected,actual);

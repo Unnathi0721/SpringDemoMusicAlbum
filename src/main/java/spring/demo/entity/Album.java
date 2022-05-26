@@ -33,7 +33,6 @@ public class Album {
     private int stock;
     @ManyToOne(cascade= { CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-//@ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="artist_id")
     private Artist artist;
     public Album(){
@@ -46,15 +45,6 @@ public class Album {
         this.stock=stock;
         this.artist = artist;
     }
-//    @Autowired
-//    private ArtistService artistService;
-//    public Album(String title, String language, String artist) {
-//
-//        this.title = title;
-//        this.language = language;
-//        this.artist = new Artist(artist);
-//        artistService.addArtist(this.artist);
-//    }
 
     public int getId() {
         return id;
